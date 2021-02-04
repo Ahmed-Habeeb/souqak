@@ -1,4 +1,4 @@
-# souqak
+# SouQak
 
 A new Flutter project.
 
