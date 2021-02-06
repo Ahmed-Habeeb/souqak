@@ -1,7 +1,7 @@
 
-import 'package:FoodSociety/models/user_model.dart';
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:souqak/models/user_model.dart';
 
 class Auth{
   String url="http://192.168.1.7:8000/api/";
@@ -15,7 +15,6 @@ class Auth{
       user0.frommap(response.data);
 
       await pref.setString('token', user0.token);
-      await pref.setInt('restaurant', user0.restaurant);
 
       return user0;
     }else{
@@ -37,7 +36,6 @@ class Auth{
       user.frommap(response.data);
 
     await pref.setString('token', user.token);
-    await pref.setInt('restaurant', user.restaurant);
 
     return user;
   }else{

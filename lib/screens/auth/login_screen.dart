@@ -1,8 +1,8 @@
-import 'package:FoodSociety/controllers/auth_controller.dart';
-import 'package:FoodSociety/screens/user/user_home.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:souqak/controllers/auth_controller.dart';
 
+import '../home_screen.dart';
 import 'signup_screen.dart';
 
 class Login_Screen extends StatelessWidget {
@@ -56,7 +56,7 @@ class _Login_FormState extends State<Login_Form> {
           child: Column(
             children: [
               Text(
-                "FoodSociety",
+                "SouQak",
                 style: TextStyle(
                     color: Colors.white,
                     fontSize: 50,
@@ -117,32 +117,33 @@ class _Login_FormState extends State<Login_Form> {
               Container(
                   width: double.infinity,
                   height: 45,
-                  child:  GetBuilder<Auth_Controller>(
+                  child: GetBuilder<Auth_Controller>(
                     init: Auth_Controller(),
-                    builder: (auth)=>ElevatedButton(
+                    builder: (auth) => ElevatedButton(
                         onPressed: () {
                           if (_formKey.currentState.validate()) {
-                            String email0=email.value.text;
-                            String password0=password.value.text;
-                            auth.login(email0,password0).then((value) {
-                              if(value){
-                                Get.to(User_Home());
+                            String email0 = email.value.text;
+                            String password0 = password.value.text;
+                            auth.login(email0, password0).then((value) {
+                              if (value) {
+                                Get.offAll(Home_Screen());
                               }
                             });
-
                           }
                         },
-                        child: Text("Login")),)),
-              SizedBox(height: 160,),
+                        child: Text("Login")),
+                  )),
+              SizedBox(
+                height: 160,
+              ),
               InkWell(
-                  onTap: (){
+                  onTap: () {
                     Get.to(SignUp_Screen());
                   },
                   child: Text(
                     "Have not an Account? SignUp",
                     style: TextStyle(color: Colors.white),
                   ))
-
             ],
           ),
         ),

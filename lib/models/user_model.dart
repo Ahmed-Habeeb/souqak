@@ -1,9 +1,8 @@
 class User_Model{
   String name,email,token,_password;
-  int restaurant;
 
 
-  User_Model({this.name, this.email, this.token, this.restaurant});
+  User_Model({this.name, this.email, this.token});
 
 
   set password(value) {
@@ -16,7 +15,6 @@ class User_Model{
     map["email"]=this.email;
     map["token"]=this.token;
     map['password']=this._password;
-    map["restaurant"]=this.restaurant;
 
 
     return map;
@@ -26,7 +24,6 @@ class User_Model{
     this.name=map["name"];
     this.email=map["email"];
     this.token=map["token"];
-    this.restaurant=map["restaurant"];
   }
 
 }

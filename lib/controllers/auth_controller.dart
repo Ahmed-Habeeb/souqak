@@ -1,7 +1,7 @@
-import 'package:FoodSociety/models/user_model.dart';
-import 'package:FoodSociety/network/Auth.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:souqak/models/user_model.dart';
+import 'package:souqak/network/Auth.dart';
 
 class Auth_Controller extends GetxController{
 

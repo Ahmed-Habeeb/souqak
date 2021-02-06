@@ -1,11 +1,12 @@
-import 'package:FoodSociety/models/user_model.dart';
-import 'package:FoodSociety/screens/auth/login_screen.dart';
-import 'package:FoodSociety/controllers/auth_controller.dart';
-import 'package:FoodSociety/screens/restaurant/restaurant_home.dart';
-import 'package:FoodSociety/screens/user/user_home.dart';
+
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:souqak/controllers/auth_controller.dart';
+import 'package:souqak/models/user_model.dart';
+import 'package:souqak/screens/home_screen.dart';
+
+import 'login_screen.dart';
 
 class SignUp_Screen extends StatelessWidget {
 
@@ -155,11 +156,11 @@ class _SignUp_FormState extends State<SignUp_Form> {
                           String name0= name.value.text;
                           String email0=email.value.text;
                           String password0=password.value.text;
-                          User_Model user=User_Model(name:name0 ,email:email0 ,restaurant: 0,);
+                          User_Model user=User_Model(name:name0 ,email:email0 );
                           user.password=password0;
                           auth.createuser(user).then((value) {
                             if(value){
-                              Get.to(User_Home());
+                              Get.to(Home_Screen());
                             }
                           });
 
