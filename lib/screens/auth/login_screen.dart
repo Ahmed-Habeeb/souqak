@@ -138,7 +138,7 @@ class _Login_FormState extends State<Login_Form> {
               ),
               InkWell(
                   onTap: () {
-                    Get.to(SignUp_Screen());
+                    Get.off(SignUp_Screen());
                   },
                   child: Text(
                     "Have not an Account? SignUp",

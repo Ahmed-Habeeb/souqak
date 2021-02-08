@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:souqak/screens/home_screen.dart';
 
-import 'screens/auth/login_screen.dart';
-
 void main() {
   runApp(MyApp());
 }

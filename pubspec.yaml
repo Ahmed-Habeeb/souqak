@@ -31,6 +31,8 @@ dependencies:
   get: ^3.24.0
   dio: ^3.0.10
   shared_preferences: ^0.5.12+4
+  font_awesome_flutter: ^8.11.0
+
 
 dev_dependencies:
   flutter_test:

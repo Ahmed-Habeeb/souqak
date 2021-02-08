@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:souqak/controllers/auth_controller.dart';
@@ -9,8 +7,6 @@ import 'package:souqak/screens/home_screen.dart';
 import 'login_screen.dart';
 
 class SignUp_Screen extends StatelessWidget {
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -150,27 +146,30 @@ class _SignUp_FormState extends State<SignUp_Form> {
                   height: 45,
                   child: GetBuilder<Auth_Controller>(
                     init: Auth_Controller(),
-                    builder: (auth)=>ElevatedButton(
-                      onPressed: () {
-                        if (_formKey1.currentState.validate()) {
-                          String name0= name.value.text;
-                          String email0=email.value.text;
-                          String password0=password.value.text;
-                          User_Model user=User_Model(name:name0 ,email:email0 );
-                          user.password=password0;
-                          auth.createuser(user).then((value) {
-                            if(value){
-                              Get.to(Home_Screen());
-                            }
-                          });
-
-                        }
-                      },
-                      child: Text("SignUp")),)),
-              SizedBox(height: 100,),
+                    builder: (auth) => ElevatedButton(
+                        onPressed: () {
+                          if (_formKey1.currentState.validate()) {
+                            String name0 = name.value.text;
+                            String email0 = email.value.text;
+                            String password0 = password.value.text;
+                            User_Model user =
+                                User_Model(name: name0, email: email0);
+                            user.password = password0;
+                            auth.createuser(user).then((value) {
+                              if (value) {
+                                Get.to(Home_Screen());
+                              }
+                            });
+                          }
+                        },
+                        child: Text("SignUp")),
+                  )),
+              SizedBox(
+                height: 100,
+              ),
               InkWell(
                   onTap: () {
-                    Get.to(Login_Screen());
+                    Get.off(Login_Screen());
                   },
                   child: Text(
                     "Already Have an Account?Login",
