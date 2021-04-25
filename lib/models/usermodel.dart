@@ -1,20 +1,15 @@
-class User_Model{
-  String name,email,token,_password;
+class UserModel{
+  String? name, email,token,password;
 
 
-  User_Model({this.name, this.email, this.token});
-
-
-  set password(value) {
-    _password = value;
-  }
+  UserModel({this.name,this.email,this.token,this.password});
 
   Map<String,dynamic> tomap(){
     Map<String,dynamic> map=Map<String,dynamic>();
     map["name"]=this.name;
     map["email"]=this.email;
     map["token"]=this.token;
-    map['password']=this._password;
+    map['password']=this.password;
 
 
     return map;

@@ -1,68 +1,58 @@
-
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:souqak/models/user_model.dart';
+import 'package:souqak/models/usermodel.dart';
 
-class Auth{
-  String url="http://192.168.1.7:8000/api/";
+class Auth {
+  String url = "http://192.168.1.7:8000/api/";
 
-  Future<User_Model> create_email(User_Model user)async {
-    SharedPreferences pref=await SharedPreferences.getInstance();
-    User_Model user0=User_Model();
+  createEmail(UserModel user) async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    UserModel user0 = UserModel();
 
-    var response = await Dio().post(url+"create",data:user.tomap() );
-    if (response.statusCode == 200 && response.data!=null) {
+    var response = await Dio().post(url + "create", data: user.tomap());
+    if (response.statusCode == 200 && response.data != null) {
       user0.frommap(response.data);
 
-      await pref.setString('token', user0.token);
+      await pref.setString('token', user0.token!);
 
       return user0;
-    }else{
-      print('Error SignUp');
+    } else {
+      return "Error";
     }
-
   }
 
-  Future<User_Model> login(String email,String pass)async {
+  login(String email, String pass) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
-    User_Model user = User_Model();
+    UserModel user = UserModel();
     Map<String, String> map = Map();
     map['email'] = email;
     map['password'] = pass;
 
     var response = await Dio().post(url + "login", data: map);
 
-    if (response.statusCode == 200 && response.data!=null){
+    if (response.statusCode == 200 && response.data != null) {
       user.frommap(response.data);
 
-    await pref.setString('token', user.token);
-
-    return user;
-  }else{
-      print("Error Login ");
-    }
-
-
-
-
-  }
- Future<User_Model> me(String token)async{
-    Map<String, String> map = Map();
-    map['Authorization']='Bearer '+token;
-    User_Model user = User_Model();
-
-
-    var response=await Dio().get(url+'me',options:Options(headers: map) );
-    if (response.statusCode == 200 && response.data!=null){
-      user.frommap(response.data);
-
+      await pref.setString('token', user.token!);
 
       return user;
-    }else{
-      print("Error Login ");
+    } else {
+      return "Error";
     }
-   print(response);
   }
 
+  me(String token) async {
+    Map<String, String> map = Map();
+    map['Authorization'] = 'Bearer ' + token;
+    UserModel user = UserModel();
 
+    var response = await Dio().get(url + 'me', options: Options(headers: map));
+    if (response.statusCode == 200 && response.data != null) {
+      user.frommap(response.data);
+
+      return user;
+    } else {
+      return "Error";
+    }
+  }
 }

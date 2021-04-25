@@ -1,20 +1,19 @@
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:souqak/models/user_model.dart';
+import 'package:souqak/models/usermodel.dart';
 import 'package:souqak/network/Auth.dart';
 
-class Auth_Controller extends GetxController{
+class AuthController extends GetxController{
 
   Auth _auth=Auth();
-  User_Model user=User_Model();
+  UserModel user=UserModel();
 
- Future<bool> createuser(User_Model user0)async{
+ Future<String> createUser(UserModel user0)async{
     SharedPreferences preferences= await SharedPreferences.getInstance();
-   user= await _auth.create_email(user0);
-   String token=preferences.getString('token');
-   if(token!=null){
-     return true;
-   }
+   var data = await _auth.createEmail(user0);
+   if(data.runtimeType==String){}
+   String token=preferences.getString('token')!;
+   return token;
 
   }
   me(String token)async{
@@ -26,10 +25,8 @@ class Auth_Controller extends GetxController{
   login(String email,String password)async{
     SharedPreferences preferences= await SharedPreferences.getInstance();
     user= await _auth.login(email,password);
-    String token=preferences.getString('token');
-    if(token!=null){
-      return true;
-    }
+    String token=preferences.getString('token')!;
+    return token;
 
   }
 
