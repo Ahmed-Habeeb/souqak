@@ -8,7 +8,6 @@ class UserModel{
     Map<String,dynamic> map=Map<String,dynamic>();
     map["name"]=this.name;
     map["email"]=this.email;
-    map["token"]=this.token;
     map['password']=this.password;
 
 

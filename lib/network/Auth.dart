@@ -3,7 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:souqak/models/usermodel.dart';
 
 class Auth {
-  String url = "http://192.168.1.7:8000/api/";
+  String url = "http://192.168.1.4:8000/api/";
 
   createEmail(UserModel user) async {
     SharedPreferences pref = await SharedPreferences.getInstance();

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:souqak/screens/auth/registerscreen.dart';
+
+import 'screens/homescreen.dart';
 
 
 void main() {
@@ -11,9 +14,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       routes: {
+        HomeScreen.screenName: (context) => HomeScreen(),
+
         // LoginScreen.screenName: (context) => LoginScreen(),
-        // SignUpScreen.screenName: (context) => SignUpScreen(),
-        // HomeScreen.screenName: (context) => HomeScreen(),
+         RegisterScreen.screenName: (context) => RegisterScreen(),
         // SearchScreen.screenName: (context) => SignUpScreen(),
         // SubCategoriesScreen.screenName: (context) => SubCategoriesScreen(),
 
@@ -23,7 +27,7 @@ class MyApp extends StatelessWidget {
 
       },
       debugShowCheckedModeBanner: false,
-      initialRoute: "/",
+      initialRoute: HomeScreen.screenName,
     );
   }
 }

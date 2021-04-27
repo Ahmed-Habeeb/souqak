@@ -1,8 +1,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.souqak">
-   <application
+
+    <application
         android:label="souqak"
-        android:icon="@mipmap/ic_launcher">
+        android:usesCleartextTraffic="true"
+        android:icon="@mipmap/ic_launcher"
+       >
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
