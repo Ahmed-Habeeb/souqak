@@ -7,14 +7,15 @@ class AuthController extends GetxController {
   Auth _auth = Auth();
   UserModel user = UserModel();
 
-  Future<bool> createUser(UserModel user0) async {
+  Future<String> createUser(UserModel user0) async {
+
     var data = await _auth.createEmail(user0);
     if (data.runtimeType == UserModel) {
       user = data;
 
-      return true;
+      return "true";
     }
-    return false;
+    return data;
   }
 
   me(String token) async {
@@ -22,13 +23,13 @@ class AuthController extends GetxController {
     update();
   }
 
-  login(String email, String password) async {
+  loginUser(String email, String password) async {
     var data = await _auth.login(email, password);
     if (data.runtimeType == UserModel) {
       user = data;
-      return true;
+      return "true";
     }
-    print(data.runtimeType);
-    return false;
+    //print(data.runtimeType);
+    return data;
   }
 }

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:souqak/controllers/authscreencontroller.dart';
-import 'package:souqak/screens/auth/loginscreen.dart';
+import 'package:souqak/screens/auth/registerscreen.dart';
 
-class RegisterScreen extends StatelessWidget {
-  static const screenName = "Register";
-final data=Get.put(AuthScreenController());
+class LoginScreen extends StatelessWidget {
+  static const screenName = "Login";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,36 +24,14 @@ final data=Get.put(AuthScreenController());
         child: Padding(
           padding: const EdgeInsets.only(top: 150, left: 20, right: 20),
           child: GetBuilder<AuthScreenController>(
-
             builder: (controller) => Form(
               autovalidateMode: AutovalidateMode.onUserInteraction,
-              key: controller.formKey,
+              key: controller.loginFormKey,
               child: Column(
                 children: [
                   Text("SouQak",style: TextStyle(color: Colors.blue,fontSize: 50,fontWeight: FontWeight.bold,letterSpacing: 1.2),),
                   SizedBox(height: 90,),
-                  TextFormField(
-                    controller: controller.name,
-                    style: TextStyle(color: Colors.black),
-                    cursorColor: Colors.black,
-                    keyboardType: TextInputType.emailAddress,
-                    decoration: InputDecoration(
-                      labelStyle: TextStyle(color: Colors.black),
-                      labelText: "name",
-                      border: OutlineInputBorder(),
-                      enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.black)),
-                    ),
-                    validator: (d) {
-                      if (d!.isEmpty) {
-                        return 'Please Enter your name!';
-                      }
-                      return null;
-                    },
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
+
                   TextFormField(
                     controller: controller.email,
                     style: TextStyle(color: Colors.black),
@@ -104,24 +82,24 @@ final data=Get.put(AuthScreenController());
                     height: 30,
                   ),
                   Container(
-                    width: double.infinity,
+                      width: double.infinity,
                       height: 50,
                       child: ElevatedButton(onPressed: (){
-                        if(controller.formKey.currentState!.validate()) {
+                        if(controller.loginFormKey.currentState!.validate()) {
                           Get.defaultDialog(
                               barrierDismissible: false,
                               title: "Loading",
                               content: CircularProgressIndicator());
-                          controller.create();
+                          controller.login();
                         }
-                      }, child: Text("SignUp"))),
-                  SizedBox(height: 100,),
+                      }, child: Text("Login"))),
+                  SizedBox(height: 180,),
                   InkWell(
-                    onTap: (){
-                      Get.offNamed(LoginScreen.screenName);
+                      onTap: (){
+                        Get.offNamed(RegisterScreen.screenName);
 
-                    },
-                      child: Text("Already Have an Account!",style: TextStyle(fontWeight: FontWeight.bold),))
+                      },
+                      child: Text("Have not an Account, Register!",style: TextStyle(fontWeight: FontWeight.bold),))
 
 
                 ],

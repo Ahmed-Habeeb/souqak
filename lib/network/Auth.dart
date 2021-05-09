@@ -14,10 +14,24 @@ class Auth {
       user0.frommap(response.data);
 
       await pref.setString('token', user0.token!);
+      print(response.data);
 
       return user0;
     } else {
-      return "Error";
+      String error;
+      if(response.data["email"]!=null){
+        print(response.data["email"][0]);
+        error =response.data["email"][0];
+        return error;
+
+      }
+      else if(response.data["password"]!=null){
+        error =response.data["password"][0];
+        return error;
+
+      }
+      error="error";
+      return error;
     }
   }
 
@@ -28,7 +42,13 @@ class Auth {
     map['email'] = email;
     map['password'] = pass;
 
-    var response = await Dio().post(url + "login", data: map);
+    var response = await Dio().post(url + "login", data: map,options: Options(
+      followRedirects: false,
+      validateStatus: (status) {
+        return (status! < 500);
+      },
+     // headers: headers,
+    ),);
 
     if (response.statusCode == 200 && response.data != null) {
       user.frommap(response.data);
@@ -37,8 +57,13 @@ class Auth {
 
       return user;
     } else {
-      return "Error";
-    }
+
+      String error;
+
+      error=response.data["error"];
+      print(response.data["error"]);
+      return error;
+      }
   }
 
   me(String token) async {
