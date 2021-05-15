@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:souqak/controllers/authcontroller.dart';
 import 'package:souqak/models/usermodel.dart';
-import 'package:souqak/screens/homescreen.dart';
+import 'package:souqak/screens/mainscreen.dart';
+import 'package:souqak/viewmodels/authviewmodel.dart';
 
-class AuthScreenController extends AuthController {
+class AuthScreenViewModel extends AuthViewModel {
   final formKey = GlobalKey<FormState>();
   final loginFormKey = GlobalKey<FormState>();
 
@@ -37,7 +37,7 @@ class AuthScreenController extends AuthController {
       email.text="";
       password.text="";
 
-      Get.offAllNamed(HomeScreen.screenName);
+      Get.offAllNamed(MainScreen.screenName);
     }else{
       Navigator.of(Get.overlayContext!).pop();
 
@@ -55,7 +55,7 @@ class AuthScreenController extends AuthController {
      email.text="";
      password.text="";
 
-     Get.offAllNamed(HomeScreen.screenName);
+     Get.offAllNamed(MainScreen.screenName);
    }else{
      Navigator.of(Get.overlayContext!).pop();
 

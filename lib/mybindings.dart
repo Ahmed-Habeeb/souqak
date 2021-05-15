@@ -1,6 +1,5 @@
 import 'package:get/get.dart';
-import 'package:souqak/controllers/authcontroller.dart';
-import 'controllers/authscreencontroller.dart';
+import 'package:souqak/viewmodels/authviewmodel.dart';
 
 
 
@@ -9,8 +8,7 @@ import 'controllers/authscreencontroller.dart';
 class MyBindings implements Bindings{
   @override
   void dependencies() {
-    Get.lazyPut<AuthController>(() => AuthController());
-    Get.lazyPut<AuthScreenController>(() => AuthScreenController());
+    Get.lazyPut<AuthViewModel>(() => AuthViewModel());
 
   }
 
