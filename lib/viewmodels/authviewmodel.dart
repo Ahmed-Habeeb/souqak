@@ -1,5 +1,4 @@
 import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:souqak/models/usermodel.dart';
 import 'package:souqak/network/Auth.dart';
 

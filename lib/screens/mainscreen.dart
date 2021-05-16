@@ -4,92 +4,133 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:souqak/screens/searchscreen.dart';
 
-class MainScreen extends StatelessWidget {
-  static const screenName = "/";
+class MainScreen extends StatefulWidget {
+  static final screenName = "/";
+
+  @override
+  _MainScreenState createState() => _MainScreenState();
+}
+
+class _MainScreenState extends State<MainScreen> {
+  bool navOpened = false;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      extendBody: true,
-      backgroundColor: Colors.white,
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      appBar: AppBar(
-        iconTheme: IconThemeData(
-          color: Colors.black,
-        ),
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        title: Text(
-          "SouQak",
-          style: TextStyle(
-              color: Colors.black,
-              letterSpacing: 1.9,
-              fontSize: 30,
-              fontFamily: "GoblinOneRegular",
-              fontWeight: FontWeight.w400),
-        ),
-        centerTitle: true,
-        actions: [
-          IconButton(
-              icon: Icon(Icons.search_sharp),
-              onPressed: () {
-                Get.toNamed(SearchScreen.screenName);
-              })
-        ],
-      ),
-      drawer: Drawer(
-        child: Container(
-          color: Colors.blue,
-        ),
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Container(
-              height: 100,
-              width: double.infinity,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (context, index) => Container(
-                  //child:Text("h")
+      body: Stack(
+        children: [
+          InkWell(
+            onTap: (){
+              setState(() {
+                navOpened=false;
+              });
+            },
+              child: Container(
+            color: Colors.blue,
+          )),
+          GestureDetector(
+            onTap: (){setState(() {
+              navOpened=false;
+            });},
+            onHorizontalDragUpdate: (i){
+              if(i.delta.dx>0){
+                setState(() {
+                  navOpened=true;
+
+                });
+              }else{
+                setState(() {
+                  navOpened=false;
+
+                });
+              }
+            },
+            child: AnimatedContainer(
+              transform: (navOpened)
+                  ? Matrix4.translationValues(200, 50, .5)
+                  : Matrix4.translationValues(0, 0, 0),
+              duration: Duration(milliseconds: 400),
+              // width: (navOpened)?Get.size.width-170:Get.size.width,
+              // height: (navOpened)?Get.size.height+50:Get.size.height,
+              child: Scaffold(
+                extendBody: true,
+                backgroundColor: Colors.white,
+                floatingActionButtonLocation:
+                    FloatingActionButtonLocation.centerDocked,
+                appBar: AppBar(
+                  leading: IconButton(
+                    icon: Icon(FontAwesomeIcons.bars),
+                    onPressed: () {
+                      setState(() {
+                        navOpened = !navOpened;
+                      });
+                    },
+                  ),
+                  iconTheme: IconThemeData(
+                    color: Colors.black,
+                  ),
+                  backgroundColor: Colors.transparent,
+                  elevation: 0,
+                  title: Text(
+                    "SouQak",
+                    style: TextStyle(
+                        color: Colors.black,
+                        letterSpacing: 1.9,
+                        fontSize: 30,
+                        fontFamily: "GoblinOneRegular",
+                        fontWeight: FontWeight.w400),
+                  ),
+                  centerTitle: true,
+                  actions: [
+                    IconButton(
+                        icon: Icon(Icons.search_sharp),
+                        onPressed: () {
+                          Get.toNamed(SearchScreen.screenName);
+                        })
+                  ],
+                ),
+                body: SingleChildScrollView(
+                  child: Column(
+                    children: [],
+                  ),
+                ),
+                bottomNavigationBar: CurvedNavigationBar(
+                  backgroundColor: Colors.transparent,
+                  color: Colors.blue,
+                  items: [
+                    Icon(
+                      FontAwesomeIcons.home,
+                      color: Colors.white,
+                      size: 20,
+                    ),
+                    Icon(
+                      Icons.apps_sharp,
+                      color: Colors.white,
+                      size: 20,
+                    ),
+                    Icon(
+                      FontAwesomeIcons.solidNewspaper,
+                      color: Colors.white,
+                      size: 20,
+                    ),
+                    Icon(
+                      FontAwesomeIcons.userAlt,
+                      color: Colors.white,
+                      size: 20,
+                    ),
+                  ],
+                ),
+                floatingActionButton: FloatingActionButton(
+                  onPressed: () {},
+                  elevation: 5,
+                  child: Icon(
+                    FontAwesomeIcons.plus,
+                  ),
                 ),
               ),
-            )
-          ],
-        ),
-      ),
-      bottomNavigationBar: CurvedNavigationBar(
-        backgroundColor: Colors.transparent,
-        color: Colors.blue,
-        items: [
-          Icon(
-            FontAwesomeIcons.home,
-            color: Colors.white,
-            size: 20,
-          ),
-          Icon(
-            Icons.apps_sharp,
-            color: Colors.white,
-            size: 20,
-          ),
-          Icon(
-            FontAwesomeIcons.solidNewspaper,
-            color: Colors.white,
-            size: 20,
-          ),
-          Icon(
-            FontAwesomeIcons.userAlt,
-            color: Colors.white,
-            size: 20,
-          ),
+            ),
+          )
         ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        elevation: 5,
-        child: Icon(
-          FontAwesomeIcons.plus,
-        ),
       ),
     );
   }
