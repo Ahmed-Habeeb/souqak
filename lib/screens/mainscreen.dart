@@ -1,4 +1,6 @@
+
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
@@ -50,8 +52,7 @@ class _MainScreenState extends State<MainScreen> {
                   ? Matrix4.translationValues(200, 50, .5)
                   : Matrix4.translationValues(0, 0, 0),
               duration: Duration(milliseconds: 400),
-              // width: (navOpened)?Get.size.width-170:Get.size.width,
-              // height: (navOpened)?Get.size.height+50:Get.size.height,
+
               child: Scaffold(
                 extendBody: true,
                 backgroundColor: Colors.white,

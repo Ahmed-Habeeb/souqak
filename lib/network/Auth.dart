@@ -35,12 +35,10 @@ class Auth {
     }
   }
 
-  login(String email, String pass) async {
+  login(Map<String,String> map) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     UserModel user = UserModel();
-    Map<String, String> map = Map();
-    map['email'] = email;
-    map['password'] = pass;
+
 
     var response = await Dio().post(url + "login", data: map,options: Options(
       followRedirects: false,
