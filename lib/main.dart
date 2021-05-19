@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:souqak/mybindings.dart';
+import 'package:souqak/screens/addscreen.dart';
 import 'package:souqak/screens/auth/registerscreen.dart';
 import 'screens/auth/loginscreen.dart';
+import 'screens/categorydetailsscreen.dart';
 import 'screens/mainscreen.dart';
 import 'screens/searchscreen.dart';
 
@@ -22,7 +24,8 @@ class MyApp extends StatelessWidget {
         LoginScreen.screenName: (context) => LoginScreen(),
         RegisterScreen.screenName: (context) => RegisterScreen(),
         SearchScreen.screenName: (context) => SearchScreen(),
-        // SubCategoriesScreen.screenName: (context) => SubCategoriesScreen(),
+        AddScreen.screenName: (context) => AddScreen(),
+        CategoryDetailsScreen.screenName: (context) => CategoryDetailsScreen(),
       },
       debugShowCheckedModeBanner: false,
       initialRoute: MainScreen.screenName,

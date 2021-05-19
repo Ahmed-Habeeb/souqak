@@ -2,6 +2,7 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:souqak/screens/addscreen.dart';
 import 'package:souqak/screens/searchscreen.dart';
 import 'package:souqak/viewmodels/mainscreencontroller.dart';
 
@@ -110,7 +111,9 @@ class MainScreen extends StatelessWidget {
                   ],
                 ),
                 floatingActionButton: FloatingActionButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Get.toNamed(AddScreen.screenName);
+                  },
                   elevation: 5,
                   child: Icon(
                     FontAwesomeIcons.plus,
