@@ -1,70 +1,58 @@
-
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:souqak/screens/searchscreen.dart';
+import 'package:souqak/viewmodels/mainscreencontroller.dart';
 
-class MainScreen extends StatefulWidget {
+import 'categoriesscreen.dart';
+import 'homescreen.dart';
+import 'newsscreen.dart';
+import 'profilescreen.dart';
+
+class MainScreen extends StatelessWidget {
   static final screenName = "/";
-
-  @override
-  _MainScreenState createState() => _MainScreenState();
-}
-
-class _MainScreenState extends State<MainScreen> {
-  bool navOpened = false;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
+      body: Obx(()=>Stack(
         children: [
+          //Inkwell Contains Drawer
           InkWell(
-            onTap: (){
-              setState(() {
-                navOpened=false;
-              });
-            },
+              onTap: () {
+                Get.find<MainScreenController>().navOpened.value = false;
+              },
               child: Container(
-            color: Colors.blue,
-          )),
+                color: Colors.blue,
+              )),
           GestureDetector(
-            onTap: (){setState(() {
-              navOpened=false;
-            });},
-            onHorizontalDragUpdate: (i){
-              if(i.delta.dx>0){
-                setState(() {
-                  navOpened=true;
-
-                });
-              }else{
-                setState(() {
-                  navOpened=false;
-
-                });
+            onTap: () {
+              Get.find<MainScreenController>().navOpened.value = false;
+            },
+            onHorizontalDragUpdate: (i) {
+              if (i.delta.dx > 0) {
+                Get.find<MainScreenController>().navOpened.value = true;
+              } else {
+                Get.find<MainScreenController>().navOpened.value = false;
               }
             },
             child: AnimatedContainer(
-              transform: (navOpened)
+              transform: (Get.find<MainScreenController>().navOpened.value)
                   ? Matrix4.translationValues(200, 50, .5)
                   : Matrix4.translationValues(0, 0, 0),
               duration: Duration(milliseconds: 400),
-
               child: Scaffold(
                 extendBody: true,
                 backgroundColor: Colors.white,
                 floatingActionButtonLocation:
-                    FloatingActionButtonLocation.centerDocked,
+                FloatingActionButtonLocation.centerDocked,
                 appBar: AppBar(
                   leading: IconButton(
                     icon: Icon(FontAwesomeIcons.bars),
                     onPressed: () {
-                      setState(() {
-                        navOpened = !navOpened;
-                      });
+                      Get.find<MainScreenController>().navOpened.value =
+                      !Get.find<MainScreenController>().navOpened.value;
                     },
                   ),
                   iconTheme: IconThemeData(
@@ -90,12 +78,12 @@ class _MainScreenState extends State<MainScreen> {
                         })
                   ],
                 ),
-                body: SingleChildScrollView(
-                  child: Column(
-                    children: [],
-                  ),
-                ),
+                body: customTabView(Get.find<MainScreenController>().index.value),
                 bottomNavigationBar: CurvedNavigationBar(
+                  onTap: (i){
+                    Get.find<MainScreenController>().index.value=i;
+                  },
+                  index: Get.find<MainScreenController>().index.value,
                   backgroundColor: Colors.transparent,
                   color: Colors.blue,
                   items: [
@@ -132,7 +120,26 @@ class _MainScreenState extends State<MainScreen> {
             ),
           )
         ],
-      ),
+      )),
     );
+  }
+  customTabView(int index){
+    switch (index) {
+      case 0:
+        return HomeScreen();
+      case 1:
+        return CategoriesScreen();
+      case 2:
+        return NewsScreen();
+      case 3:
+        return ProfileScreen();
+      default:
+        return Container(
+          child: Center(
+            child: Text("Default"),
+          ),
+        );
+        break;
+    }
   }
 }
