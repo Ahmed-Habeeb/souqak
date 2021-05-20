@@ -6,8 +6,11 @@ import 'package:get/get.dart';
 
 
 class MainScreenController extends GetxController {
-  RxBool navOpened = false.obs;
-  RxInt index=0.obs;
+  var navOpened = false.obs;
+  var index=0.obs;
+
+  var categoriesList=["Clothes & Accessories","Electronics","Home & Garden","Vehicles","Family","Entertainment"];
+  String selectedCategory="All";
 
 
 

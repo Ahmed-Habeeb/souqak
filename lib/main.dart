@@ -5,7 +5,7 @@ import 'package:souqak/screens/addscreen.dart';
 import 'package:souqak/screens/auth/registerscreen.dart';
 import 'screens/auth/loginscreen.dart';
 import 'screens/categorydetailsscreen.dart';
-import 'screens/mainscreen.dart';
+import 'screens/mainscreen/mainscreen.dart';
 import 'screens/searchscreen.dart';
 
 void main() {
@@ -20,7 +20,6 @@ class MyApp extends StatelessWidget {
       initialBinding: MyBindings(),
       routes: {
         MainScreen.screenName: (context) => MainScreen(),
-
         LoginScreen.screenName: (context) => LoginScreen(),
         RegisterScreen.screenName: (context) => RegisterScreen(),
         SearchScreen.screenName: (context) => SearchScreen(),

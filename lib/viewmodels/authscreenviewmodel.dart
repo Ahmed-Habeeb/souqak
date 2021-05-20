@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:souqak/models/usermodel.dart';
-import 'package:souqak/screens/mainscreen.dart';
+import 'package:souqak/screens/mainscreen/mainscreen.dart';
 import 'package:souqak/viewmodels/authviewmodel.dart';
 
 class AuthScreenViewModel extends AuthViewModel {
