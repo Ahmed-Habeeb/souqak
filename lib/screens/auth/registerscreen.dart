@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:souqak/screens/auth/loginscreen.dart';
-import 'package:souqak/viewmodels/authscreenviewmodel.dart';
+import 'package:souqak/viewmodels/authscreencontroller.dart';
 
 class RegisterScreen extends StatelessWidget {
   static const screenName = "Register";
@@ -22,7 +22,7 @@ class RegisterScreen extends StatelessWidget {
 
         child: Padding(
           padding: const EdgeInsets.only(top: 150, left: 20, right: 20),
-          child: GetBuilder<AuthScreenViewModel>(
+          child: GetBuilder<AuthScreenController>(
 
             builder: (controller) => Form(
               autovalidateMode: AutovalidateMode.onUserInteraction,

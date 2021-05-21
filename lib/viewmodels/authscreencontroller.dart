@@ -4,7 +4,7 @@ import 'package:souqak/models/usermodel.dart';
 import 'package:souqak/screens/mainscreen/mainscreen.dart';
 import 'package:souqak/viewmodels/authviewmodel.dart';
 
-class AuthScreenViewModel extends AuthViewModel {
+class AuthScreenController extends AuthViewModel {
   final formKey = GlobalKey<FormState>();
   final loginFormKey = GlobalKey<FormState>();
 
