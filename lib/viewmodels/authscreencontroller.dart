@@ -5,6 +5,7 @@ import 'package:souqak/screens/mainscreen/mainscreen.dart';
 import 'package:souqak/viewmodels/authviewmodel.dart';
 
 class AuthScreenController extends AuthViewModel {
+  bool login0=true;
   final formKey = GlobalKey<FormState>();
   final loginFormKey = GlobalKey<FormState>();
 
@@ -28,6 +29,11 @@ class AuthScreenController extends AuthViewModel {
     email.dispose();
     password.dispose();
     super.dispose();
+  }
+  changeLogin(bool b){
+    login0=b;
+    print(Get.size);
+    update();
   }
   create()async{
     UserModel userModel=UserModel(name: name.text,email: email.text,password: password.text);

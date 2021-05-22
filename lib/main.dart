@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:souqak/mybindings.dart';
 import 'package:souqak/screens/addscreen.dart';
-import 'package:souqak/screens/auth/registerscreen.dart';
-import 'screens/auth/loginscreen.dart';
+import 'package:souqak/screens/auth/authscreen.dart';
+
 import 'screens/categorydetailsscreen.dart';
 import 'screens/mainscreen/mainscreen.dart';
 import 'screens/searchscreen.dart';
@@ -20,8 +20,7 @@ class MyApp extends StatelessWidget {
       initialBinding: MyBindings(),
       routes: {
         MainScreen.screenName: (context) => MainScreen(),
-        LoginScreen.screenName: (context) => LoginScreen(),
-        RegisterScreen.screenName: (context) => RegisterScreen(),
+        AuthScreen.screenName: (context) => AuthScreen(),
         SearchScreen.screenName: (context) => SearchScreen(),
         AddScreen.screenName: (context) => AddScreen(),
         CategoryDetailsScreen.screenName: (context) => CategoryDetailsScreen(),

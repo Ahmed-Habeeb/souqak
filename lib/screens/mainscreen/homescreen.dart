@@ -14,7 +14,7 @@ class HomeScreen extends StatelessWidget {
       builder: (controller) => Container(
 
         child: ListView.builder(
-          padding: EdgeInsets.only(top: 40),
+          padding: EdgeInsets.only(top: 20,bottom: 100),
           itemCount: controller.categoriesList.length,
           itemBuilder: (context, index) =>
               drawCategory(controller.categoriesList[index]),
@@ -24,11 +24,11 @@ class HomeScreen extends StatelessWidget {
   }
 
   drawCategory(String category) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 20, right: 20),
-      child: Column(
-        children: [
-          Row(
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(left: 15,right: 15),
+          child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
@@ -55,22 +55,23 @@ class HomeScreen extends StatelessWidget {
               )
             ],
           ),
-          Container(
-            height: 230,
-            margin: EdgeInsets.only(top: 20,bottom: 20,),
-            child: ListView.builder(
-              itemCount: 10,
+        ),
+        Container(
+          height: 230,
+          margin: EdgeInsets.only(top: 10,bottom: 10),
+          child: ListView.builder(
+            padding: EdgeInsets.only(left: 15,right: 15),
+            itemCount: 10,
 
-              scrollDirection: Axis.horizontal,
-              itemBuilder: (context, index) => drawCard(faker.image.image(
-                  height: 100,
-                  width: 100,
-                  random: true,
-                  keywords: [category]),category),
-            ),
-          )
-        ],
-      ),
+            scrollDirection: Axis.horizontal,
+            itemBuilder: (context, index) => drawCard(faker.image.image(
+                height: 100,
+                width: 100,
+                random: true,
+                keywords: [category]),category),
+          ),
+        )
+      ],
     );
   }
 
@@ -121,6 +122,7 @@ class HomeScreen extends StatelessWidget {
 
                         ],
                       ),
+                      SizedBox(width: 5,),
 
                       Text(
                         "250" + " \$",

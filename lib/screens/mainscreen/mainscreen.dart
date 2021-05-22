@@ -6,7 +6,6 @@ import 'package:souqak/screens/addscreen.dart';
 import 'package:souqak/screens/customdrawer.dart';
 import 'package:souqak/screens/searchscreen.dart';
 import 'package:souqak/viewmodels/mainscreencontroller.dart';
-
 import 'categoriesscreen.dart';
 import 'homescreen.dart';
 import 'newsscreen.dart';
@@ -58,11 +57,13 @@ class MainScreen1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: false,
       extendBody: true,
       backgroundColor: Colors.white,
       floatingActionButtonLocation:
       FloatingActionButtonLocation.centerDocked,
       appBar: AppBar(
+
         leading: IconButton(
           icon: Icon(FontAwesomeIcons.bars),
           onPressed: () {
@@ -73,8 +74,8 @@ class MainScreen1 extends StatelessWidget {
         iconTheme: IconThemeData(
           color: Colors.black,
         ),
-        backgroundColor: Colors.transparent,
-        elevation: 0,
+        backgroundColor: Colors.white,
+        //elevation: 0,
         title: Text(
           "SouQak",
           style: TextStyle(
