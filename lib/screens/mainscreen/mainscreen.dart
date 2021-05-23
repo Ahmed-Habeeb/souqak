@@ -8,7 +8,7 @@ import 'package:souqak/screens/searchscreen.dart';
 import 'package:souqak/viewmodels/mainscreencontroller.dart';
 import 'categoriesscreen.dart';
 import 'homescreen.dart';
-import 'newsscreen.dart';
+import 'cartscreen.dart';
 import 'profilescreen.dart';
 
 class MainScreen extends StatelessWidget {
@@ -57,11 +57,11 @@ class MainScreen1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      extendBodyBehindAppBar: false,
+      extendBodyBehindAppBar: true,
       extendBody: true,
       backgroundColor: Colors.white,
-      floatingActionButtonLocation:
-      FloatingActionButtonLocation.centerDocked,
+      // floatingActionButtonLocation:
+      // FloatingActionButtonLocation.centerDocked,
       appBar: AppBar(
 
         leading: IconButton(
@@ -114,7 +114,7 @@ class MainScreen1 extends StatelessWidget {
             size: 20,
           ),
           Icon(
-            FontAwesomeIcons.solidNewspaper,
+            FontAwesomeIcons.shoppingCart,
             color: Colors.white,
             size: 20,
           ),
@@ -143,7 +143,7 @@ class MainScreen1 extends StatelessWidget {
       case 1:
         return CategoriesScreen();
       case 2:
-        return NewsScreen();
+        return CartScreen();
       case 3:
         return ProfileScreen();
       default:

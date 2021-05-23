@@ -14,7 +14,7 @@ class HomeScreen extends StatelessWidget {
       builder: (controller) => Container(
 
         child: ListView.builder(
-          padding: EdgeInsets.only(top: 20,bottom: 100),
+          padding: EdgeInsets.only(top: 100,bottom: 100),
           itemCount: controller.categoriesList.length,
           itemBuilder: (context, index) =>
               drawCategory(controller.categoriesList[index]),

@@ -32,7 +32,6 @@ class AuthScreenController extends AuthViewModel {
   }
   changeLogin(bool b){
     login0=b;
-    print(Get.size);
     update();
   }
   create()async{
