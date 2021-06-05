@@ -57,7 +57,6 @@ class MainScreen1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      extendBodyBehindAppBar: true,
       extendBody: true,
       backgroundColor: Colors.white,
       // floatingActionButtonLocation:
@@ -75,7 +74,7 @@ class MainScreen1 extends StatelessWidget {
           color: Colors.black,
         ),
         backgroundColor: Colors.white,
-        //elevation: 0,
+        elevation: 0,
         title: Text(
           "SouQak",
           style: TextStyle(
@@ -152,7 +151,6 @@ class MainScreen1 extends StatelessWidget {
             child: Text("Default"),
           ),
         );
-        break;
     }
   }
 

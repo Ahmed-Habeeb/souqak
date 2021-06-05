@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:souqak/models/usermodel.dart';
 import 'package:souqak/network/Auth.dart';
@@ -6,6 +5,9 @@ import 'package:souqak/network/Auth.dart';
 class AuthViewModel extends GetxController {
   Auth _auth = Auth();
   UserModel user = UserModel();
+
+
+
 
   Future<String> createUser(UserModel user0) async {
 
@@ -19,6 +21,7 @@ class AuthViewModel extends GetxController {
   }
 
   me(String token) async {
+    print("Me");
     user = await _auth.me(token);
     update();
   }
@@ -27,7 +30,8 @@ class AuthViewModel extends GetxController {
     Map<String, String> map = Map();
     map['email'] = email;
     map['password'] = password;
-    var data = await compute( _auth.login,map);
+   // var data = await compute( _auth.login,map);
+   var data=await _auth.login(map);
     if (data.runtimeType == UserModel) {
       user = data;
       return "true";
@@ -35,4 +39,5 @@ class AuthViewModel extends GetxController {
     //print(data.runtimeType);
     return data;
   }
+
 }

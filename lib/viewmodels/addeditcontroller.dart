@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -8,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:souqak/models/itemmodel.dart';
 import 'package:souqak/network/store.dart';
+import 'package:souqak/viewmodels/authviewmodel.dart';
 
 class AddEditController extends GetxController {
   late Store store;
@@ -38,8 +38,7 @@ class AddEditController extends GetxController {
     price = TextEditingController();
     name = TextEditingController();
     details = TextEditingController();
-    sharedPreferences = await SharedPreferences.getInstance();
-    token = sharedPreferences.getString("token");
+    token = Get.find<AuthViewModel>().user.token;
     store = Store(token);
     handleSubcategory(category);
     super.onInit();
@@ -65,16 +64,17 @@ class AddEditController extends GetxController {
   }
 
   addItem() async {
+
     ItemModel item = ItemModel(
       category: category,
-      details: details!.text,
-      name: name!.text,
-      price: double.parse(price!.text),
       subcategory: subcategory,
+      name: name!.text,
+      details: details!.text,
+      price: double.parse(price!.text),
     );
-    store.addItem(item, file0!);
+    bool data=await store.addItem(item, file0!);
+    (data)?Get.back():Get.defaultDialog(content: Text("SomeThing Went Error"));
 
-    Get.back();
   }
 
   getGalleryimage() async {
@@ -102,7 +102,7 @@ class AddEditController extends GetxController {
           'Bags',
           'Women\'s Clothing & Shoes',
           'Men\'s Clothing & Shoes',
-          'Jewelry & Accessories'
+          'Jewelry & Accessories',
               'Kids',
         ];
         subcategory = 'Bags';

@@ -1,3 +1,8 @@
+
+
+
+
+
 class UserModel{
   String? name, email,token,password;
 
@@ -15,9 +20,11 @@ class UserModel{
 
   }
   frommap(Map<String,dynamic> map){
+    String tok=(map["token"]).toString().replaceAll("Bearer ", "");
+
     this.name=map["name"];
     this.email=map["email"];
-    this.token=map["token"];
+    this.token=tok;
   }
 
 }
