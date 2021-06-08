@@ -11,6 +11,11 @@ class MainScreenController extends GetxController {
   var categoriesList=["Clothes & Accessories","Electronics","Home & Garden","Vehicles","Family","Entertainment"];
   String selectedCategory="All";
 
+  changeIndex(int i){
+    index.value=i;
+    update();
+  }
+
 
 
 

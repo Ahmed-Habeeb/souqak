@@ -94,7 +94,7 @@ class MainScreen1 extends StatelessWidget {
         ],
       ),
       body: GetX<MainScreenController>(builder: (controller)=>customTabView(controller.index.value)),
-      bottomNavigationBar: CurvedNavigationBar(
+      bottomNavigationBar:GetX<MainScreenController>(builder: (controller)=>CurvedNavigationBar(
         onTap: (i){
           Get.find<MainScreenController>().index.value=i;
         },
@@ -123,7 +123,8 @@ class MainScreen1 extends StatelessWidget {
             size: 20,
           ),
         ],
-      ),
+      ),),
+
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Get.toNamed(AddScreen.screenName);

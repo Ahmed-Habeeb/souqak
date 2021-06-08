@@ -3,47 +3,53 @@ import 'package:get/get.dart';
 import 'package:souqak/viewmodels/authscreencontroller.dart';
 import 'package:souqak/viewmodels/authviewmodel.dart';
 
-
-
-
-
 class ProfileScreen extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return Container(
       child: SingleChildScrollView(
-        child:(Get.find<AuthViewModel>().user.name != null)?Container(): authContainer(Get.size.height-200,Get.width),
+        child: (Get.find<AuthViewModel>().user.token != null&&Get.find<AuthViewModel>().user.token!="noToken")
+            ? profile()
+            : authContainer(Get.size.height - 200, Get.width),
       ),
-
     );
   }
 }
-authContainer(double h,double w){
-  Size s=Size(w, h);
+
+authContainer(double h, double w) {
+  Size s = Size(w, h);
   return GetBuilder<AuthScreenController>(
     init: AuthScreenController(),
     builder: (controller) => Container(
-      child: (controller.login0)?loginForm(s):signupForm(s),
-
-    ),);
+      child: (controller.login0) ? loginForm(s) : signupForm(s),
+    ),
+  );
 }
-loginForm(Size s){
+
+loginForm(Size s) {
   return Container(
-
-
-
     child: Padding(
-      padding:  EdgeInsets.only(top: (s.height*0.182), left: s.width*0.055, right: s.width*0.055),
+      padding: EdgeInsets.only(
+          top: (s.height * 0.182),
+          left: s.width * 0.055,
+          right: s.width * 0.055),
       child: GetBuilder<AuthScreenController>(
         builder: (controller) => Form(
           autovalidateMode: AutovalidateMode.onUserInteraction,
           key: controller.loginFormKey,
           child: Column(
             children: [
-              Text("SouQak",style: TextStyle(color: Colors.blue,fontSize: 40,fontWeight: FontWeight.bold,fontFamily: "GoblinOneRegular"),),
-              SizedBox(height: s.height*0.115,),
-
+              Text(
+                "SouQak",
+                style: TextStyle(
+                    color: Colors.blue,
+                    fontSize: 40,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: "GoblinOneRegular"),
+              ),
+              SizedBox(
+                height: s.height * 0.115,
+              ),
               TextFormField(
                 controller: controller.email,
                 style: TextStyle(color: Colors.black),
@@ -66,7 +72,7 @@ loginForm(Size s){
                 },
               ),
               SizedBox(
-                height: s.height*0.025,
+                height: s.height * 0.025,
               ),
               TextFormField(
                 controller: controller.password,
@@ -91,30 +97,34 @@ loginForm(Size s){
                 },
               ),
               SizedBox(
-                height: s.height*0.038,
+                height: s.height * 0.038,
               ),
               Container(
                   width: double.infinity,
-                  height: Get.height*0.064,
-                  child: ElevatedButton(onPressed: (){
-                    if(controller.loginFormKey.currentState!.validate()) {
-                      Get.defaultDialog(
-                          barrierDismissible: false,
-                          title: "Loading",
-                          content: CircularProgressIndicator());
-                      controller.login();
-                    }
-                  }, child: Text("Login"))),
-              SizedBox(height: s.height*0.150,),
+                  height: Get.height * 0.064,
+                  child: ElevatedButton(
+                      onPressed: () {
+                        if (controller.loginFormKey.currentState!.validate()) {
+                          Get.defaultDialog(
+                              barrierDismissible: false,
+                              title: "Loading",
+                              content: CircularProgressIndicator());
+                          controller.login();
+                        }
+                      },
+                      child: Text("Login"))),
+              SizedBox(
+                height: s.height * 0.150,
+              ),
               InkWell(
-                  onTap: (){
+                  onTap: () {
                     // Get.offNamed(RegisterScreen.screenName);
                     controller.changeLogin(false);
-
                   },
-                  child: Text("Have not an Account, Register!",style: TextStyle(fontWeight: FontWeight.bold),))
-
-
+                  child: Text(
+                    "Have not an Account, Register!",
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ))
             ],
           ),
         ),
@@ -122,22 +132,31 @@ loginForm(Size s){
     ),
   );
 }
-signupForm(Size s){
 
+signupForm(Size s) {
   return Container(
-
-
     child: Padding(
-      padding:  EdgeInsets.only(top: (s.height*0.182), left: s.width*0.055, right: s.width*0.055),
+      padding: EdgeInsets.only(
+          top: (s.height * 0.182),
+          left: s.width * 0.055,
+          right: s.width * 0.055),
       child: GetBuilder<AuthScreenController>(
-
         builder: (controller) => Form(
           autovalidateMode: AutovalidateMode.onUserInteraction,
           key: controller.formKey,
           child: Column(
             children: [
-              Text("SouQak",style: TextStyle(color: Colors.blue,fontSize: 40,fontFamily: "GoblinOneRegular",),),
-              SizedBox(height: s.height*0.115,),
+              Text(
+                "SouQak",
+                style: TextStyle(
+                  color: Colors.blue,
+                  fontSize: 40,
+                  fontFamily: "GoblinOneRegular",
+                ),
+              ),
+              SizedBox(
+                height: s.height * 0.115,
+              ),
               TextFormField(
                 controller: controller.name,
                 style: TextStyle(color: Colors.black),
@@ -158,7 +177,7 @@ signupForm(Size s){
                 },
               ),
               SizedBox(
-                height: s.height*0.0256,
+                height: s.height * 0.0256,
               ),
               TextFormField(
                 controller: controller.email,
@@ -182,7 +201,7 @@ signupForm(Size s){
                 },
               ),
               SizedBox(
-                height: s.height*0.0256,
+                height: s.height * 0.0256,
               ),
               TextFormField(
                 controller: controller.password,
@@ -207,30 +226,34 @@ signupForm(Size s){
                 },
               ),
               SizedBox(
-                height: s.height*0.038,
+                height: s.height * 0.038,
               ),
               Container(
                   width: double.infinity,
-                  height: Get.height*0.064,
-                  child: ElevatedButton(onPressed: (){
-                    if(controller.formKey.currentState!.validate()) {
-                      Get.defaultDialog(
-                          barrierDismissible: false,
-                          title: "Loading",
-                          content: CircularProgressIndicator());
-                      controller.create();
-                    }
-                  }, child: Text("SignUp"))),
-              SizedBox(height: s.height*0.07,),
+                  height: Get.height * 0.064,
+                  child: ElevatedButton(
+                      onPressed: () {
+                        if (controller.formKey.currentState!.validate()) {
+                          Get.defaultDialog(
+                              barrierDismissible: false,
+                              title: "Loading",
+                              content: CircularProgressIndicator());
+                          controller.create();
+                        }
+                      },
+                      child: Text("SignUp"))),
+              SizedBox(
+                height: s.height * 0.07,
+              ),
               InkWell(
-                  onTap: (){
+                  onTap: () {
                     // Get.offNamed(LoginScreen.screenName);
                     controller.changeLogin(true);
-
                   },
-                  child: Text("Already Have an Account!",style: TextStyle(fontWeight: FontWeight.bold),))
-
-
+                  child: Text(
+                    "Already Have an Account!",
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ))
             ],
           ),
         ),
@@ -239,3 +262,26 @@ signupForm(Size s){
   );
 }
 
+profile() {
+  return GetBuilder<AuthScreenController>(
+    init: AuthScreenController(),
+    builder: (controller) => Container(
+      margin: EdgeInsets.only(top: 400),
+      child: Center(
+        child: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+              primary: Colors.red, minimumSize: Size(double.infinity, 50)),
+          onPressed: () {
+            Get.defaultDialog(
+                barrierDismissible: false,
+                title: "Loading",
+                content: CircularProgressIndicator());
+            controller.logout0();
+
+          },
+          child: Text("Logout"),
+        ),
+      ),
+    ),
+  );
+}

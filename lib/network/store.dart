@@ -7,7 +7,7 @@ import 'package:souqak/models/itemmodel.dart';
 class Store {
   String? token;
 
-  String url = "http://192.168.1.17:8000/api/";
+  String url = "http://192.168.1.18:8000/api/";
 
   Store(this.token);
 

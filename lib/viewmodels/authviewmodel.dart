@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:souqak/models/usermodel.dart';
 import 'package:souqak/network/Auth.dart';
 
@@ -34,10 +35,23 @@ class AuthViewModel extends GetxController {
    var data=await _auth.login(map);
     if (data.runtimeType == UserModel) {
       user = data;
+      update();
       return "true";
     }
     //print(data.runtimeType);
     return data;
+  }
+ Future<bool> logout()async{
+    var pref = await SharedPreferences.getInstance();
+    String token = pref.getString("token")!;
+   bool data=await _auth.logout(token);
+    if(data) {
+
+      user.token="noToken";
+      return await pref.setString("token", "noToken");
+    }else {
+      return data;
+    }
   }
 
 }
