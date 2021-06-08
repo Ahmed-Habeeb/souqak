@@ -7,11 +7,13 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: SingleChildScrollView(
-        child: (Get.find<AuthViewModel>().user.token != null&&Get.find<AuthViewModel>().user.token!="noToken")
+      child: GetBuilder<AuthScreenController>(
+        init: AuthScreenController(),
+        builder: (controller) => SingleChildScrollView(
+        child: (controller.login1)
             ? profile()
             : authContainer(Get.size.height - 200, Get.width),
-      ),
+      ),),
     );
   }
 }

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:souqak/models/usermodel.dart';
-import 'package:souqak/screens/mainscreen/mainscreen.dart';
 import 'package:souqak/viewmodels/authviewmodel.dart';
 import 'package:souqak/viewmodels/mainscreencontroller.dart';
 
 class AuthScreenController extends AuthViewModel {
   bool login0=true;
- late bool login1;
+  bool login1=false;
   final formKey = GlobalKey<FormState>();
   final loginFormKey = GlobalKey<FormState>();
 
@@ -17,12 +17,12 @@ class AuthScreenController extends AuthViewModel {
   late TextEditingController password;
 
   @override
-  void onInit() {
+  void onInit() async{
     name = TextEditingController();
 
     email = TextEditingController();
     password = TextEditingController();
-    login1=(user.name!=null);
+    checkLogin();
     print(login1);
 
     super.onInit();
@@ -91,7 +91,14 @@ class AuthScreenController extends AuthViewModel {
          content: Text("Email or Password is Wrong !"));
    }
   }
+ checkLogin()async{
+  var pref = await SharedPreferences.getInstance();
+  String? token = pref.getString("token");
+  login1= (token != null && token !="noToken");
+  update();
 
+
+}
 
 
 

@@ -2,9 +2,11 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:souqak/screens/addscreen.dart';
 import 'package:souqak/screens/customdrawer.dart';
 import 'package:souqak/screens/searchscreen.dart';
+import 'package:souqak/viewmodels/authviewmodel.dart';
 import 'package:souqak/viewmodels/mainscreencontroller.dart';
 import 'categoriesscreen.dart';
 import 'homescreen.dart';
@@ -126,9 +128,14 @@ class MainScreen1 extends StatelessWidget {
       ),),
 
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Get.toNamed(AddScreen.screenName);
-        },
+        onPressed: ()async {
+          bool d=await checkLogin();
+          if(d) {
+            Get.toNamed(AddScreen.screenName);
+          }else{
+          Get.find<MainScreenController>().index.value=3;
+        }
+          },
         elevation: 5,
         child: Icon(
           FontAwesomeIcons.plus,
@@ -153,6 +160,13 @@ class MainScreen1 extends StatelessWidget {
           ),
         );
     }
+  }
+  checkLogin()async{
+    var pref = await SharedPreferences.getInstance();
+    String? token = pref.getString("token");
+    return (token != null && token !="noToken");
+
+
   }
 
 }

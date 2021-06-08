@@ -47,11 +47,15 @@ class AuthViewModel extends GetxController {
    bool data=await _auth.logout(token);
     if(data) {
 
-      user.token="noToken";
+      emptyUser();
       return await pref.setString("token", "noToken");
     }else {
       return data;
     }
+  }
+  emptyUser(){
+    user=UserModel();
+    update();
   }
 
 }
