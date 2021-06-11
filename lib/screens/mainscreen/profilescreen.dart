@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:souqak/viewmodels/authscreencontroller.dart';
-import 'package:souqak/viewmodels/authviewmodel.dart';
 
 class ProfileScreen extends StatelessWidget {
   @override

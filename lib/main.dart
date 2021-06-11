@@ -28,7 +28,6 @@ class MyApp extends StatelessWidget {
       initialBinding: MyBindings(),
       routes: {
         MainScreen.screenName: (context) => MainScreen(),
-        // AuthScreen.screenName: (context) => AuthScreen(),
         SearchScreen.screenName: (context) => SearchScreen(),
         AddScreen.screenName: (context) => AddScreen(),
         CategoryDetailsScreen.screenName: (context) => CategoryDetailsScreen(),
@@ -39,7 +38,7 @@ class MyApp extends StatelessWidget {
   }
 
   getUser(String? token) async {
-    if (token != null && token !="noToken") {
+    if (token != null && token != "noToken") {
       print(token);
       Get.find<AuthViewModel>().me(token);
     }

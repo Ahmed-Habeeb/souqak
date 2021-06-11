@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
@@ -47,29 +46,45 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(left: 10,bottom: 20),
-                child: Text("Categories",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
-              ),
-              Container(
-                height: 135,
-                width: double.infinity,
-                margin: EdgeInsets.only(bottom: 20,),
-                child: GridView.builder(
-                  padding: EdgeInsets.only(left: 20, right: 20),
-                  itemCount: controller.categoriesList.length,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 3,
-                      childAspectRatio: 1.7,
-                      mainAxisSpacing: 10,
-                      crossAxisSpacing: 10),
-                  itemBuilder: (context, index) =>
-                      categoryCard(controller.categoriesList[index]),
+                padding: const EdgeInsets.only(left: 10, bottom: 20),
+                child: Text(
+                  "Categories",
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(left: 10,bottom: 20),
-                child: Text("Latest Products",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
+              GridView.builder(
+                shrinkWrap: true,
+                padding: EdgeInsets.only(left: 20, right: 20),
+                itemCount: controller.categoriesList.length,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 3,
+                    childAspectRatio: 1.7,
+                    mainAxisSpacing: 10,
+                    crossAxisSpacing: 10),
+                itemBuilder: (context, index) =>
+                    categoryCard(controller.categoriesList[index]),
               ),
+              Padding(
+                padding: const EdgeInsets.only(top: 50, left: 10, bottom: 20),
+                child: Text(
+                  "Latest Products",
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                ),
+              ),
+              ListView.builder(
+                // gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                //     crossAxisCount: 2,
+                //     childAspectRatio: 1.7,
+                //     mainAxisSpacing: 10,
+                //     crossAxisSpacing: 10),
+                itemCount: 20,
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+                itemBuilder: (context, index) => Container(
+                   child: Center(child: Text("Hello"),),
+                 ),),
+              //...controller.categoriesList.map((e) => Text(e))
+        
             ],
           ),
         ),
@@ -79,16 +94,20 @@ class HomeScreen extends StatelessWidget {
 
   categoryCard(String category) {
     return InkWell(
-      onTap: (){
-        Get.find<MainScreenController>().selectedCategory=category;
+      onTap: () {
+        Get.find<MainScreenController>().selectedCategory = category;
         Get.toNamed(CategoryDetailsScreen.screenName);
       },
       child: Container(
-        decoration: BoxDecoration(color: Colors.blue,borderRadius: BorderRadius.circular(10)),
+        decoration: BoxDecoration(
+            color: Colors.blue, borderRadius: BorderRadius.circular(10)),
         child: Center(
             child: Text(
           (category == "Clothes & Accessories") ? "Clothes" : category,
-          style: TextStyle(color: Colors.white, fontFamily: "SansitaSwashed",fontSize: 14.3),
+          style: TextStyle(
+              color: Colors.white,
+              fontFamily: "SansitaSwashed",
+              fontSize: 14.3),
         )),
       ),
     );

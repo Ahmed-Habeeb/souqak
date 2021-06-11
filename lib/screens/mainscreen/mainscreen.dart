@@ -5,13 +5,13 @@ import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:souqak/screens/addscreen.dart';
 import 'package:souqak/screens/customdrawer.dart';
+import 'package:souqak/screens/mainscreen/cartscreen.dart';
+import 'package:souqak/screens/mainscreen/categoriesscreen.dart';
+import 'package:souqak/screens/mainscreen/homescreen.dart';
+import 'package:souqak/screens/mainscreen/profilescreen.dart';
 import 'package:souqak/screens/searchscreen.dart';
-import 'package:souqak/viewmodels/authviewmodel.dart';
 import 'package:souqak/viewmodels/mainscreencontroller.dart';
-import 'categoriesscreen.dart';
-import 'homescreen.dart';
-import 'cartscreen.dart';
-import 'profilescreen.dart';
+
 
 class MainScreen extends StatelessWidget {
   static const screenName = "/";
