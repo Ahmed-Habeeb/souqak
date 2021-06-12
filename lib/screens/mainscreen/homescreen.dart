@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:souqak/models/itemmodel.dart';
 import 'package:souqak/screens/categorydetailsscreen.dart';
+import 'package:souqak/screens/itemdetailsscreen.dart';
 import 'package:souqak/screens/searchscreen.dart';
 import 'package:souqak/viewmodels/mainscreencontroller.dart';
 
@@ -71,20 +73,19 @@ class HomeScreen extends StatelessWidget {
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                 ),
               ),
-              ListView.builder(
-                // gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                //     crossAxisCount: 2,
-                //     childAspectRatio: 1.7,
-                //     mainAxisSpacing: 10,
-                //     crossAxisSpacing: 10),
-                itemCount: 20,
+              GridView.builder(
+                padding: EdgeInsets.only(left: 20, right: 20, bottom: 100),
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    childAspectRatio: .75,
+                    mainAxisSpacing: 10,
+                    crossAxisSpacing: 10),
+                itemCount: controller.latest.length,
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),
-                itemBuilder: (context, index) => Container(
-                   child: Center(child: Text("Hello"),),
-                 ),),
-              //...controller.categoriesList.map((e) => Text(e))
-        
+                itemBuilder: (context, index) =>
+                    drawLatestCard(controller.latest[index], index),
+              ),
             ],
           ),
         ),
@@ -109,6 +110,62 @@ class HomeScreen extends StatelessWidget {
               fontFamily: "SansitaSwashed",
               fontSize: 14.3),
         )),
+      ),
+    );
+  }
+
+  drawLatestCard(ItemModel item, int index) {
+    String url = "http://192.168.1.18:8000/storage/images/";
+
+    return InkWell(
+      onTap: () {
+        Get.to(ItemDetailsScreen(index));
+      },
+      child: Card(
+        elevation: 8,
+        child: Padding(
+          padding: EdgeInsets.only(top: 8.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Hero(
+                tag: index,
+                child: Container(
+                  height: 95,
+                  width: Get.width / 2 - 20,
+                  child: Image.network(
+                    url + item.image!,
+                    fit: BoxFit.contain,
+                  ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.only(top: 15, left: 20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Hero(
+                      tag: item.name!,
+                      child: Container(
+                        constraints:
+                            BoxConstraints(maxWidth: Get.width / 2 - 20),
+                        child: Text(
+                          "${item.name}  \n${item.price} \$",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 15),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    Text(item.category!),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }

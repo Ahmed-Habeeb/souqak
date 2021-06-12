@@ -31,6 +31,7 @@ class MyApp extends StatelessWidget {
         SearchScreen.screenName: (context) => SearchScreen(),
         AddScreen.screenName: (context) => AddScreen(),
         CategoryDetailsScreen.screenName: (context) => CategoryDetailsScreen(),
+        //   ItemDetailsScreen.screenName: (context) => ItemDetailsScreen(),
       },
       debugShowCheckedModeBanner: false,
       initialRoute: MainScreen.screenName,

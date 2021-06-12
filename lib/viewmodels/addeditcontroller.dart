@@ -39,7 +39,7 @@ class AddEditController extends GetxController {
     name = TextEditingController();
     details = TextEditingController();
     token = Get.find<AuthViewModel>().user.token;
-    store = Store(token);
+    store = Store(token: token);
     handleSubcategory(category);
     super.onInit();
   }

@@ -9,7 +9,7 @@ class Store {
 
   String url = "http://192.168.1.18:8000/api/";
 
-  Store(this.token);
+  Store({this.token});
 
   uploadImage(File image) async {
     Map<String, dynamic> map = Map();
@@ -141,6 +141,20 @@ class Store {
       }
     }
 
+    return list;
+  }
+
+  Future<List<ItemModel>> fetchLatest() async {
+    List<ItemModel> list = [];
+
+    var response = await Dio().get(url + "fetchlatest");
+    if (response.statusCode == 200) {
+      for (var i in response.data) {
+        ItemModel item = ItemModel();
+        item.fromMap(i);
+        list.add(item);
+      }
+    }
     return list;
   }
 }
