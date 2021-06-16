@@ -1,14 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:souqak/viewmodels/mainscreencontroller.dart';
 
-class ItemDetailsScreen extends StatelessWidget {
-  static const screenName = "itemDetails";
+class ItemDetailsScreen extends StatefulWidget {
+  int? _index;
 
-  int? index;
-  String url = "http://192.168.1.18:8000/storage/images/";
+  ItemDetailsScreen(this._index);
 
-  ItemDetailsScreen(this.index);
+  @override
+  _ItemDetailsScreenState createState() => _ItemDetailsScreenState(_index);
+}
+
+class _ItemDetailsScreenState extends State<ItemDetailsScreen> {
+  int? _index;
+  String _url = "http://192.168.1.18:8000/storage/images/";
+  int _quantity = 1;
+
+  _ItemDetailsScreenState(this._index);
 
   @override
   Widget build(BuildContext context) {
@@ -27,13 +36,13 @@ class ItemDetailsScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Hero(
-                  tag: index!,
+                  tag: _index!,
                   child: Container(
-                    height: 220,
+                    height: Get.height / 2 - 20,
                     width: double.infinity,
                     child: Image.network(
-                      url + controller.latest[index!].image!,
-                      fit: BoxFit.fill,
+                      _url + controller.latest[_index!].image!,
+                      fit: BoxFit.contain,
                     ),
                   ),
                 ),
@@ -43,9 +52,9 @@ class ItemDetailsScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Hero(
-                        tag: controller.latest[index!].name!,
+                        tag: controller.latest[_index!].name!,
                         child: Text(
-                          controller.latest[index!].name!,
+                          controller.latest[_index!].name!,
                           style: TextStyle(
                               fontSize: 30,
                               fontWeight: FontWeight.bold,
@@ -55,25 +64,55 @@ class ItemDetailsScreen extends StatelessWidget {
                       SizedBox(
                         height: 15,
                       ),
-                      Text(
-                        controller.latest[index!].price!.toString() + "  \$",
-                        style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w900,
-                            color: Colors.blue,
-                            fontFamily: "GoblinOneRegular"),
-                      ),
                       SizedBox(
                         height: 15,
                       ),
                       Text(
-                        controller.latest[index!].details!,
+                        controller.latest[_index!].details!,
                         style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.w900,
                           color: Colors.grey.shade700,
                           //    fontFamily: "SansitaSwashed"
                         ),
+                      ),
+                      SizedBox(
+                        height: 35,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          counterDrawer(),
+                          Row(
+                            children: [
+                              Text(
+                                "Total  : ",
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.grey.shade600,
+                                ),
+                              ),
+                              Text(
+                                "\$ ${controller.latest[_index!].price! * _quantity}",
+                                style: TextStyle(
+                                    fontSize: 20,
+                                    fontFamily: "SansitaSwashed",
+                                    fontWeight: FontWeight.bold),
+                              )
+                            ],
+                          )
+                        ],
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      ElevatedButton(
+                        onPressed: () {},
+                        child: Text("Add to Cart"),
+                        style: ButtonStyle(
+                            minimumSize: MaterialStateProperty.all(
+                                Size(double.infinity, 50))),
                       )
                     ],
                   ),
@@ -83,6 +122,64 @@ class ItemDetailsScreen extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+
+  counterDrawer() {
+    return Row(
+      children: [
+        Text(
+          "Qty",
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 20,
+            color: Colors.grey.shade600,
+          ),
+        ),
+        // SizedBox(
+        //   width: 5,
+        // ),
+        ElevatedButton(
+          onPressed: () {
+            if (_quantity > 1) {
+              setState(() {
+                _quantity--;
+              });
+            }
+          },
+          child: Icon(
+            FontAwesomeIcons.minus,
+            size: 20,
+          ),
+          style: ButtonStyle(
+              padding: MaterialStateProperty.all(EdgeInsets.zero),
+              minimumSize: MaterialStateProperty.all<Size>(Size(30, 30)),
+              // fixedSize: MaterialStateProperty.all<Size>(Size(10, 20)),
+              elevation: MaterialStateProperty.all(0),
+              shape: MaterialStateProperty.all<CircleBorder>(CircleBorder())),
+        ),
+        Text(
+          _quantity.toString(),
+          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+        ),
+        ElevatedButton(
+          onPressed: () {
+            setState(() {
+              _quantity++;
+            });
+          },
+          child: Icon(
+            FontAwesomeIcons.plus,
+            size: 20,
+          ),
+          style: ButtonStyle(
+              padding: MaterialStateProperty.all(EdgeInsets.zero),
+              minimumSize: MaterialStateProperty.all<Size>(Size(30, 30)),
+              // fixedSize: MaterialStateProperty.all<Size>(Size(10, 20)),
+              elevation: MaterialStateProperty.all(0),
+              shape: MaterialStateProperty.all<CircleBorder>(CircleBorder())),
+        ),
+      ],
     );
   }
 }

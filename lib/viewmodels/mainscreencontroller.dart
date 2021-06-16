@@ -6,6 +6,7 @@ class MainScreenController extends GetxController {
   var _store = Store();
   var navOpened = false.obs;
   var index = 0.obs;
+  var appBarTitle = ["Home", "Categories", "Cart", "Profile"];
   var categoriesList = [
     "Clothes & Accessories",
     "Electronics",

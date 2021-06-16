@@ -119,7 +119,7 @@ class HomeScreen extends StatelessWidget {
 
     return InkWell(
       onTap: () {
-        Get.to(ItemDetailsScreen(index));
+        Get.to(() => ItemDetailsScreen(index));
       },
       child: Card(
         elevation: 8,

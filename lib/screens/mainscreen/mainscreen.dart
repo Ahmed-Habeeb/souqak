@@ -69,7 +69,7 @@ class MainScreen1 extends StatelessWidget {
           icon: Icon(FontAwesomeIcons.bars),
           onPressed: () {
             Get.find<MainScreenController>().navOpened.value =
-            !Get.find<MainScreenController>().navOpened.value;
+                !Get.find<MainScreenController>().navOpened.value;
           },
         ),
         iconTheme: IconThemeData(
@@ -77,14 +77,16 @@ class MainScreen1 extends StatelessWidget {
         ),
         backgroundColor: Colors.white,
         elevation: 0,
-        title: Text(
-          "SouQak",
-          style: TextStyle(
-              color: Colors.black,
-              letterSpacing: 1.9,
-              fontSize: 30,
-              fontFamily: "GoblinOneRegular",
-              fontWeight: FontWeight.w400),
+        title: GetX<MainScreenController>(
+          builder: (controller) => Text(
+            controller.appBarTitle[controller.index.value],
+            style: TextStyle(
+                color: Colors.black,
+                letterSpacing: 1.9,
+                fontSize: (controller.index.value == 1) ? 25 : 30,
+                fontFamily: "GoblinOneRegular",
+                fontWeight: FontWeight.w400),
+          ),
         ),
         centerTitle: true,
         actions: [

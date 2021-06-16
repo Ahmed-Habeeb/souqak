@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:souqak/screens/profiledetails.dart';
 import 'package:souqak/viewmodels/authscreencontroller.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -9,10 +11,11 @@ class ProfileScreen extends StatelessWidget {
       child: GetBuilder<AuthScreenController>(
         init: AuthScreenController(),
         builder: (controller) => SingleChildScrollView(
-        child: (controller.login1)
-            ? profile()
-            : authContainer(Get.size.height - 200, Get.width),
-      ),),
+          child: (controller.login1)
+              ? profile()
+              : authContainer(Get.size.height - 200, Get.width),
+        ),
+      ),
     );
   }
 }
@@ -264,6 +267,126 @@ signupForm(Size s) {
 }
 
 profile() {
+  return Container(
+    height: Get.height - 250,
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        ListTile(
+          leading: Icon(
+            FontAwesomeIcons.userAlt,
+          ),
+          title: Text(
+            "Profile Details",
+            style: TextStyle(
+                fontSize: 25,
+                fontFamily: "SansitaSwashed",
+                fontWeight: FontWeight.bold),
+          ),
+          trailing: Icon(FontAwesomeIcons.chevronRight),
+          onTap: () {
+            Get.to(() => ProfileDetails());
+          },
+        ),
+        ListTile(
+          leading: Icon(
+            FontAwesomeIcons.truck,
+          ),
+          title: Text(
+            "My Orders",
+            style: TextStyle(
+                fontSize: 25,
+                fontFamily: "SansitaSwashed",
+                fontWeight: FontWeight.bold),
+          ),
+          trailing: Icon(FontAwesomeIcons.chevronRight),
+          onTap: () {
+            Get.to(() => ProfileDetails());
+          },
+        ),
+        ListTile(
+          leading: Icon(
+            FontAwesomeIcons.wallet,
+          ),
+          title: Text(
+            "Wallet",
+            style: TextStyle(
+                fontSize: 25,
+                fontFamily: "SansitaSwashed",
+                fontWeight: FontWeight.bold),
+          ),
+          trailing: Icon(FontAwesomeIcons.chevronRight),
+          onTap: () {
+            Get.to(() => ProfileDetails());
+          },
+        ),
+        ListTile(
+          leading: Icon(
+            FontAwesomeIcons.gift,
+          ),
+          title: Text(
+            "My Coupon",
+            style: TextStyle(
+                fontSize: 25,
+                fontFamily: "SansitaSwashed",
+                fontWeight: FontWeight.bold),
+          ),
+          trailing: Icon(FontAwesomeIcons.chevronRight),
+          onTap: () {
+            Get.to(() => ProfileDetails());
+          },
+        ),
+        ListTile(
+          leading: Icon(
+            FontAwesomeIcons.solidCommentDots,
+          ),
+          title: Text(
+            "Chat With Us",
+            style: TextStyle(
+                fontSize: 25,
+                fontFamily: "SansitaSwashed",
+                fontWeight: FontWeight.bold),
+          ),
+          trailing: Icon(FontAwesomeIcons.chevronRight),
+          onTap: () {
+            Get.to(() => ProfileDetails());
+          },
+        ),
+        GetBuilder<AuthScreenController>(
+          init: AuthScreenController(),
+          builder: (controller) => ListTile(
+            leading: Icon(
+              FontAwesomeIcons.signOutAlt,
+              color: Colors.red,
+            ),
+            title: Text(
+              "log Out",
+              style: TextStyle(
+                  fontSize: 25,
+                  color: Colors.red,
+                  fontFamily: "SansitaSwashed",
+                  fontWeight: FontWeight.w600),
+            ),
+            trailing: Icon(
+              FontAwesomeIcons.chevronRight,
+              color: Colors.red,
+            ),
+            onTap: () {
+              Get.defaultDialog(
+                  barrierDismissible: false,
+                  title: "Loading",
+                  content: CircularProgressIndicator());
+              controller.logout0();
+            },
+          ),
+        )
+      ],
+    ),
+  );
+}
+
+profile1() {
   return GetBuilder<AuthScreenController>(
     init: AuthScreenController(),
     builder: (controller) => Container(
@@ -278,7 +401,6 @@ profile() {
                 title: "Loading",
                 content: CircularProgressIndicator());
             controller.logout0();
-
           },
           child: Text("Logout"),
         ),
