@@ -7,7 +7,7 @@ import 'package:souqak/models/itemmodel.dart';
 class Store {
   String? token;
 
-  String url = "http://192.168.1.18:8000/api/";
+  String url = "http://192.168.1.10:8000/api/";
 
   Store({this.token});
 
@@ -28,7 +28,7 @@ class Store {
   }
 
   Future<bool> addItem(ItemModel item, File image) async {
-    Map<String, dynamic>? map = item.toMap();
+    Map<String, dynamic> map = item.toMap();
     // var bytes=image.readAsBytesSync();
     // var image0=base64Encode(bytes);
 
@@ -38,10 +38,13 @@ class Store {
       "image": await MultipartFile.fromFile(image.path, filename: name),
       "data": map
     });
+
     map['Authorization'] = 'Bearer ' + token!;
 
     var response = await Dio().post(url + "items/add",
         data: formData, options: Options(headers: map));
+
+    print(response);
 
     return (response.statusCode == 200);
   }
@@ -149,7 +152,8 @@ class Store {
 
     var response = await Dio().get(url + "fetchlatest");
     if (response.statusCode == 200) {
-      for (var i in response.data) {
+      var res=response.data['data'];
+      for (var i in res) {
         ItemModel item = ItemModel();
         item.fromMap(i);
         list.add(item);

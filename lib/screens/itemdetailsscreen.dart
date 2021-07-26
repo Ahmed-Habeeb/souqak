@@ -14,7 +14,7 @@ class ItemDetailsScreen extends StatefulWidget {
 
 class _ItemDetailsScreenState extends State<ItemDetailsScreen> {
   int? _index;
-  String _url = "http://192.168.1.18:8000/storage/images/";
+  String _url = "http://192.168.1.10:8000/storage/images/";
   int _quantity = 1;
 
   _ItemDetailsScreenState(this._index);
@@ -32,92 +32,91 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen> {
         builder: (controller) => SingleChildScrollView(
           child: Container(
             width: double.infinity,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Hero(
-                  tag: _index!,
-                  child: Container(
-                    height: Get.height / 2 - 20,
-                    width: double.infinity,
-                    child: Image.network(
-                      _url + controller.latest[_index!].image!,
-                      fit: BoxFit.contain,
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Hero(
+                    tag: _index!,
+                    child: Container(
+                      height: Get.height / 2 - 20,
+                      width: double.infinity,
+                      child: Image.network(
+                        _url + controller.latest[_index!].image!,
+                        fit: BoxFit.contain,
+                      ),
                     ),
                   ),
-                ),
-                Padding(
-                  padding: EdgeInsets.all(15),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Hero(
-                        tag: controller.latest[_index!].name!,
-                        child: Text(
+                  Padding(
+                    padding: EdgeInsets.all(15),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
                           controller.latest[_index!].name!,
                           style: TextStyle(
                               fontSize: 30,
                               fontWeight: FontWeight.bold,
                               fontFamily: "SansitaSwashed"),
                         ),
-                      ),
-                      SizedBox(
-                        height: 15,
-                      ),
-                      SizedBox(
-                        height: 15,
-                      ),
-                      Text(
-                        controller.latest[_index!].details!,
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w900,
-                          color: Colors.grey.shade700,
-                          //    fontFamily: "SansitaSwashed"
+                        SizedBox(
+                          height: 15,
                         ),
-                      ),
-                      SizedBox(
-                        height: 35,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          counterDrawer(),
-                          Row(
-                            children: [
-                              Text(
-                                "Total  : ",
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.grey.shade600,
-                                ),
-                              ),
-                              Text(
-                                "\$ ${controller.latest[_index!].price! * _quantity}",
-                                style: TextStyle(
+                        SizedBox(
+                          height: 15,
+                        ),
+                        Text(
+                          controller.latest[_index!].details!,
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w900,
+                            color: Colors.grey.shade700,
+                            //    fontFamily: "SansitaSwashed"
+                          ),
+                        ),
+                        SizedBox(
+                          height: 35,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            counterDrawer(),
+                            Row(
+                              children: [
+                                Text(
+                                  "Total  : ",
+                                  style: TextStyle(
                                     fontSize: 20,
-                                    fontFamily: "SansitaSwashed",
-                                    fontWeight: FontWeight.bold),
-                              )
-                            ],
-                          )
-                        ],
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      ElevatedButton(
-                        onPressed: () {},
-                        child: Text("Add to Cart"),
-                        style: ButtonStyle(
-                            minimumSize: MaterialStateProperty.all(
-                                Size(double.infinity, 50))),
-                      )
-                    ],
-                  ),
-                )
-              ],
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.grey.shade600,
+                                  ),
+                                ),
+                                Text(
+                                  "\$ ${controller.latest[_index!].price! * _quantity}",
+                                  style: TextStyle(
+                                      fontSize: 20,
+                                      fontFamily: "SansitaSwashed",
+                                      fontWeight: FontWeight.bold),
+                                )
+                              ],
+                            )
+                          ],
+                        ),
+                        SizedBox(
+                          height: 30,
+                        ),
+                        ElevatedButton(
+                          onPressed: () {},
+                          child: Text("Add to Cart"),
+                          style: ButtonStyle(
+                              minimumSize: MaterialStateProperty.all(
+                                  Size(double.infinity, 50))),
+                        )
+                      ],
+                    ),
+                  )
+                ],
+              ),
             ),
           ),
         ),

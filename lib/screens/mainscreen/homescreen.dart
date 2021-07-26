@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:souqak/models/itemmodel.dart';
@@ -73,19 +74,25 @@ class HomeScreen extends StatelessWidget {
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                 ),
               ),
-              GridView.builder(
-                padding: EdgeInsets.only(left: 20, right: 20, bottom: 100),
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    childAspectRatio: .75,
-                    mainAxisSpacing: 10,
-                    crossAxisSpacing: 10),
-                itemCount: controller.latest.length,
-                shrinkWrap: true,
-                physics: NeverScrollableScrollPhysics(),
-                itemBuilder: (context, index) =>
-                    drawLatestCard(controller.latest[index], index),
-              ),
+              (controller.latest.isNotEmpty)?
+              StaggeredGridView.countBuilder(
+                  crossAxisCount: 4,
+                  staggeredTileBuilder: (int index) =>
+                  new StaggeredTile.count(2, index.isEven ? 2.7: 2.4),
+                  mainAxisSpacing: 4.0,
+                  crossAxisSpacing: 4.0,
+
+                  padding: EdgeInsets.only(left: 20, right: 20, bottom: 75),
+                  itemCount: controller.latest.length,
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  itemBuilder: (context, index) =>
+                      drawLatestCard(controller.latest[index], index)
+
+              )
+                  :Container(
+                height: 200,
+                child: Center(child: CircularProgressIndicator(),),)
             ],
           ),
         ),
@@ -96,7 +103,7 @@ class HomeScreen extends StatelessWidget {
   categoryCard(String category) {
     return InkWell(
       onTap: () {
-        Get.find<MainScreenController>().selectedCategory = category;
+        Get.find<MainScreenController>().changeCategory(category);
         Get.toNamed(CategoryDetailsScreen.screenName);
       },
       child: Container(
@@ -115,7 +122,7 @@ class HomeScreen extends StatelessWidget {
   }
 
   drawLatestCard(ItemModel item, int index) {
-    String url = "http://192.168.1.18:8000/storage/images/";
+    String url = "http://192.168.1.10:8000/storage/images/";
 
     return InkWell(
       onTap: () {
@@ -144,16 +151,13 @@ class HomeScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Hero(
-                      tag: item.name!,
-                      child: Container(
-                        constraints:
-                            BoxConstraints(maxWidth: Get.width / 2 - 20),
-                        child: Text(
-                          "${item.name}  \n${item.price} \$",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 15),
-                        ),
+                    Container(
+                      constraints:
+                          BoxConstraints(maxWidth: Get.width / 2 - 20),
+                      child: Text(
+                        "${item.name}  \n${item.price} \$",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 15),
                       ),
                     ),
                     SizedBox(

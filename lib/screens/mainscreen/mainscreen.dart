@@ -6,7 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:souqak/screens/addscreen.dart';
 import 'package:souqak/screens/customdrawer.dart';
 import 'package:souqak/screens/mainscreen/cartscreen.dart';
-import 'package:souqak/screens/mainscreen/categoriesscreen.dart';
+import 'package:souqak/screens/mainscreen/ordersscreen.dart';
 import 'package:souqak/screens/mainscreen/homescreen.dart';
 import 'package:souqak/screens/mainscreen/profilescreen.dart';
 import 'package:souqak/screens/searchscreen.dart';
@@ -112,12 +112,12 @@ class MainScreen1 extends StatelessWidget {
             size: 20,
           ),
           Icon(
-            Icons.apps_sharp,
+            FontAwesomeIcons.shoppingCart,
             color: Colors.white,
             size: 20,
           ),
           Icon(
-            FontAwesomeIcons.shoppingCart,
+            Icons.ac_unit,
             color: Colors.white,
             size: 20,
           ),
@@ -131,6 +131,10 @@ class MainScreen1 extends StatelessWidget {
 
       floatingActionButton: FloatingActionButton(
         onPressed: ()async {
+          // var pref = await SharedPreferences.getInstance();
+          //
+          // await pref.setString("token", "noToken");
+
           bool d=await checkLogin();
           if(d) {
             Get.toNamed(AddScreen.screenName);
@@ -150,9 +154,9 @@ class MainScreen1 extends StatelessWidget {
       case 0:
         return HomeScreen();
       case 1:
-        return CategoriesScreen();
-      case 2:
         return CartScreen();
+      case 2:
+        return OrdersScreen();
       case 3:
         return ProfileScreen();
       default:

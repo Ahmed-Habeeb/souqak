@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
@@ -122,7 +123,7 @@ class AddScreen extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(10),
                                   image: DecorationImage(
                                       image: FileImage(controller.file0!),
-                                      fit: BoxFit.cover)),
+                                      fit: BoxFit.contain)),
                             ),
                     ),
                     TextFormField(
@@ -225,6 +226,13 @@ class AddScreen extends StatelessWidget {
                       child: ElevatedButton(
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
+                            if(controller.file0==null){
+                              Get.defaultDialog(
+                                content: Text("Please Choose an Image")
+                              );
+
+                            }
+
                             controller.addItem();
                           }
                         },

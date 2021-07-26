@@ -6,8 +6,8 @@ import 'package:souqak/viewmodels/authviewmodel.dart';
 import 'package:souqak/viewmodels/mainscreencontroller.dart';
 
 class AuthScreenController extends AuthViewModel {
-  bool login0=true;
-  bool login1=false;
+  bool loginOrReg=true;
+  bool? loginCheck;
   final formKey = GlobalKey<FormState>();
   final loginFormKey = GlobalKey<FormState>();
 
@@ -23,7 +23,6 @@ class AuthScreenController extends AuthViewModel {
     email = TextEditingController();
     password = TextEditingController();
     checkLogin();
-    print(login1);
 
     super.onInit();
   }
@@ -35,12 +34,13 @@ class AuthScreenController extends AuthViewModel {
     super.dispose();
   }
   changeLogin(bool b){
-    login0=b;
+    loginOrReg=b;
     update();
   }
-  create()async{
+  @override
+  create(UserModel? s) async {
     UserModel userModel=UserModel(name: name.text,email: email.text,password: password.text);
-    var d=await super.createUser(userModel);
+    var d=await super.create(userModel);
     if(d=="true"){
       name.text="";
       email.text="";
@@ -56,28 +56,39 @@ class AuthScreenController extends AuthViewModel {
           content: Text(d));
     }
 
+return "";
 
   }
-  login()async{
-   var d=await super.loginUser(email.text, password.text);
-   if(d=="true"){
-     name.text="";
-     email.text="";
-     password.text="";
 
-     Navigator.of(Get.overlayContext!).pop();
 
-     Get.find<MainScreenController>().changeIndex(0);
-   }else{
-     Navigator.of(Get.overlayContext!).pop();
 
-     Get.defaultDialog(
-         title: "Error",
-         content: Text("Email or Password is Wrong !"));
-   }
+@override
+login(String? e,String? p)async{
+  var d=await super.login(email.text, password.text);
+  if(d=="true"){
+    name.text="";
+    email.text="";
+    password.text="";
 
+    Navigator.of(Get.overlayContext!).pop();
+
+    Get.find<MainScreenController>().changeIndex(0);
+  }else{
+    Navigator.of(Get.overlayContext!).pop();
+
+    Get.defaultDialog(
+        title: "Error",
+        content: Text("Email or Password is Wrong !"));
   }
-  logout0()async{
+
+
+}
+
+
+
+
+@override
+  logout()async{
     bool d=await super.logout();
    if (d){
      Navigator.of(Get.overlayContext!).pop();
@@ -90,11 +101,14 @@ class AuthScreenController extends AuthViewModel {
          title: "Error",
          content: Text("Email or Password is Wrong !"));
    }
+   return true;
   }
+
  checkLogin()async{
   var pref = await SharedPreferences.getInstance();
   String? token = pref.getString("token");
-  login1= (token != null && token !="noToken");
+  loginCheck= (token != null && token !="noToken");
+
   update();
 
 

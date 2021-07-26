@@ -35,10 +35,12 @@ class AddEditController extends GetxController {
 
   @override
   void onInit() async {
+    var pref = await SharedPreferences.getInstance();
+
     price = TextEditingController();
     name = TextEditingController();
     details = TextEditingController();
-    token = Get.find<AuthViewModel>().user.token;
+    token = pref.getString("token");
     store = Store(token: token);
     handleSubcategory(category);
     super.onInit();

@@ -11,7 +11,15 @@ class ProfileScreen extends StatelessWidget {
       child: GetBuilder<AuthScreenController>(
         init: AuthScreenController(),
         builder: (controller) => SingleChildScrollView(
-          child: (controller.login1)
+          child:
+          (controller.loginCheck==null)?Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              CircularProgressIndicator(),
+            ],
+          ):
+          (controller.loginCheck!)
               ? profile()
               : authContainer(Get.size.height - 200, Get.width),
         ),
@@ -25,7 +33,7 @@ authContainer(double h, double w) {
   return GetBuilder<AuthScreenController>(
     init: AuthScreenController(),
     builder: (controller) => Container(
-      child: (controller.login0) ? loginForm(s) : signupForm(s),
+      child: (controller.loginOrReg) ? loginForm(s) : signupForm(s),
     ),
   );
 }
@@ -113,7 +121,7 @@ loginForm(Size s) {
                               barrierDismissible: false,
                               title: "Loading",
                               content: CircularProgressIndicator());
-                          controller.login();
+                          controller.login(null , null);
                         }
                       },
                       child: Text("Login"))),
@@ -242,7 +250,7 @@ signupForm(Size s) {
                               barrierDismissible: false,
                               title: "Loading",
                               content: CircularProgressIndicator());
-                          controller.create();
+                          controller.create(null);
                         }
                       },
                       child: Text("SignUp"))),
@@ -377,7 +385,7 @@ profile() {
                   barrierDismissible: false,
                   title: "Loading",
                   content: CircularProgressIndicator());
-              controller.logout0();
+              controller.logout();
             },
           ),
         )
@@ -400,7 +408,7 @@ profile1() {
                 barrierDismissible: false,
                 title: "Loading",
                 content: CircularProgressIndicator());
-            controller.logout0();
+            controller.logout();
           },
           child: Text("Logout"),
         ),

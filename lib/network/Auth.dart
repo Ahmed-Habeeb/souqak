@@ -3,7 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:souqak/models/usermodel.dart';
 
 class Auth {
-  String url = "http://192.168.1.18:8000/api/";
+  String url = "http://192.168.1.10:8000/api/";
 
   createEmail(UserModel user) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
@@ -69,7 +69,7 @@ class Auth {
     map['Authorization'] = 'Bearer ' + token;
     UserModel user = UserModel();
 
-    var response = await Dio().get(url + 'me', options: Options(headers: map));
+    var response = await Dio().get(url + 'me', options: Options(headers: map)).catchError((e)=>e);
     if (response.statusCode == 200 && response.data != null) {
       user.frommap(response.data);
 

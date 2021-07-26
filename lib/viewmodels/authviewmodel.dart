@@ -10,7 +10,7 @@ class AuthViewModel extends GetxController {
 
 
 
-  Future<String> createUser(UserModel user0) async {
+  Future<String> create(UserModel user0) async {
 
     var data = await _auth.createEmail(user0);
     if (data.runtimeType == UserModel) {
@@ -27,7 +27,7 @@ class AuthViewModel extends GetxController {
     update();
   }
 
-  loginUser(String email, String password) async {
+  login(String email, String password) async {
     Map<String, String> map = Map();
     map['email'] = email;
     map['password'] = password;
@@ -48,7 +48,8 @@ class AuthViewModel extends GetxController {
     if(data) {
 
       emptyUser();
-      return await pref.setString("token", "noToken");
+      await pref.setString("token", "noToken");
+      return true;
     }else {
       return data;
     }
